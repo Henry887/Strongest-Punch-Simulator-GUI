@@ -1,6 +1,6 @@
 -- Converted by "Gui to Lua"
 -- Made by Henry1887#6969
--- If u want to have faster autofarm, go to line 293 and change the wait time between every teleport example: wait(3). (WARNING If u make it faster than it is at default, then your game can crash)
+-- If u want to have faster autofarm, go to line 240 and change the wait time between every teleport example: wait(3). (WARNING If u make it faster than it is at default, then your game can crash)
 -- WARNING: DONT AUTOFARM ON A WORLD U DONT HAVE ACCESS TO, YOU WILL GET BANNED!!!!
 
 local ScreenGui = Instance.new("ScreenGui")
