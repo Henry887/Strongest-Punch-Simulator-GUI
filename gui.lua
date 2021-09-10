@@ -201,8 +201,23 @@ local function YQMLIJB_fake_script() -- main.close
 	local script = Instance.new('LocalScript', main)
 
 	local close = script.Parent.close
+	local btn = script.Parent.autofarm
 	local screengui =script.Parent.Parent
-	
+	local on = false
+	btn.MouseButton1Down:Connect(function()
+		if on then
+			on = false
+		else
+			while on do
+				local vu = game:GetService("VirtualUser")
+    				game:GetService("Players").LocalPlayer.Idled:connect(function()
+        				vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        				wait(1)
+        				vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    				end)
+			end
+		end
+	end)
 	close.MouseButton1Down:Connect(function()
 		screengui:Destroy()
 	end)
