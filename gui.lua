@@ -205,23 +205,12 @@ local function YQMLIJB_fake_script() -- main.close
 	local screengui =script.Parent.Parent
 	local on = false
 	btn.MouseButton1Down:Connect(function()
-		if on then
-			on = false
-			print("off")
-		else
-			print("on")
-			on = true
-			local vu = game:GetService("VirtualUser")
-    			game:GetService("Players").LocalPlayer.Idled:connect(function()
-				if on then
-        				vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-        				wait(1)
-        				vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-				else
-					break
-				end
-			end)
-		end
+		local vu = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+   			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   			wait(1)
+   			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
 	end)
 	close.MouseButton1Down:Connect(function()
 		screengui:Destroy()
