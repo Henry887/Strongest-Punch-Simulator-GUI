@@ -207,7 +207,9 @@ local function YQMLIJB_fake_script() -- main.close
 	btn.MouseButton1Down:Connect(function()
 		if on then
 			on = false
+			print("off")
 		else
+			print("on")
 			while on do
 				local vu = game:GetService("VirtualUser")
     				game:GetService("Players").LocalPlayer.Idled:connect(function()
