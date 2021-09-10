@@ -210,6 +210,7 @@ local function YQMLIJB_fake_script() -- main.close
 			print("off")
 		else
 			print("on")
+			on = true
 			while on do
 				local vu = game:GetService("VirtualUser")
     				game:GetService("Players").LocalPlayer.Idled:connect(function()
