@@ -1,7 +1,10 @@
 -- Converted by "Gui to Lua"
 -- Made by Henry1887#6969
--- If u want to have faster autofarm, go to line 240 and change the wait time between every teleport example: wait(3). (WARNING If u make it faster than it is at default, then your game can crash)
--- WARNING: DONT AUTOFARM ON A WORLD U DONT HAVE ACCESS TO, YOU WILL GET BANNED!!!!
+-- If u want to have faster autofarm, go to line 277 and change the wait time between every teleport example: wait(3). (WARNING If u make it faster than it is at default, then your game can crash)
+-- This is the updated version, i added esp!
+-- if there are new orbs spawning you have to turn esp off and on again
+-- WARNING: Dont use the autofarm on a world u dont have access to!!!!!!
+
 
 local ScreenGui = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
@@ -14,6 +17,8 @@ local autofarm = Instance.new("TextButton")
 local close = Instance.new("TextButton")
 local warning = Instance.new("TextLabel")
 local TextButton = Instance.new("TextButton")
+local espstatus = Instance.new("TextLabel")
+local esp = Instance.new("TextButton")
 
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -74,7 +79,7 @@ autostatus.Name = "autostatus"
 autostatus.Parent = main
 autostatus.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 autostatus.BackgroundTransparency = 1.000
-autostatus.Position = UDim2.new(0.186274514, 0, 0.411764711, 0)
+autostatus.Position = UDim2.new(-0.0343137234, 0, 0.411764711, 0)
 autostatus.Size = UDim2.new(0, 146, 0, 24)
 autostatus.Font = Enum.Font.GothamBold
 autostatus.Text = "AutoFarm: OFF"
@@ -86,7 +91,7 @@ autofarm.Parent = main
 autofarm.BackgroundColor3 = Color3.fromRGB(55, 255, 0)
 autofarm.BackgroundTransparency = 0.700
 autofarm.BorderSizePixel = 0
-autofarm.Position = UDim2.new(0.387254894, 0, 0.66911763, 0)
+autofarm.Position = UDim2.new(0.171568617, 0, 0.698529422, 0)
 autofarm.Size = UDim2.new(0, 62, 0, 18)
 autofarm.Font = Enum.Font.Gotham
 autofarm.Text = "ON/OFF"
@@ -127,9 +132,32 @@ TextButton.Text = "X"
 TextButton.TextColor3 = Color3.fromRGB(255, 0, 0)
 TextButton.TextSize = 14.000
 
+espstatus.Name = "espstatus"
+espstatus.Parent = main
+espstatus.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+espstatus.BackgroundTransparency = 1.000
+espstatus.Position = UDim2.new(0.441176474, 0, 0.411764711, 0)
+espstatus.Size = UDim2.new(0, 146, 0, 24)
+espstatus.Font = Enum.Font.GothamBold
+espstatus.Text = "ESP: OFF"
+espstatus.TextColor3 = Color3.fromRGB(0, 0, 0)
+espstatus.TextSize = 14.000
+
+esp.Name = "esp"
+esp.Parent = main
+esp.BackgroundColor3 = Color3.fromRGB(55, 255, 0)
+esp.BackgroundTransparency = 0.700
+esp.BorderSizePixel = 0
+esp.Position = UDim2.new(0.647058785, 0, 0.698529422, 0)
+esp.Size = UDim2.new(0, 62, 0, 18)
+esp.Font = Enum.Font.Gotham
+esp.Text = "ON/OFF"
+esp.TextColor3 = Color3.fromRGB(0, 0, 0)
+esp.TextSize = 14.000
+
 -- Scripts:
 
-local function PJLIST_fake_script() -- main.drag 
+local function FURF_fake_script() -- main.drag 
 	local script = Instance.new('LocalScript', main)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -172,8 +200,8 @@ local function PJLIST_fake_script() -- main.drag
 		end
 	end)
 end
-coroutine.wrap(PJLIST_fake_script)()
-local function JLWQG_fake_script() -- main.worldchanger 
+coroutine.wrap(FURF_fake_script)()
+local function IXJFA_fake_script() -- main.worldchanger 
 	local script = Instance.new('LocalScript', main)
 
 	local up = script.Parent.up
@@ -196,8 +224,8 @@ local function JLWQG_fake_script() -- main.worldchanger
 		world.Text = tostring(world_number)
 	end)
 end
-coroutine.wrap(JLWQG_fake_script)()
-local function YQMLIJB_fake_script() -- main.close 
+coroutine.wrap(IXJFA_fake_script)()
+local function TEDNRRW_fake_script() -- main.close 
 	local script = Instance.new('LocalScript', main)
 
 	local close = script.Parent.close
@@ -207,17 +235,17 @@ local function YQMLIJB_fake_script() -- main.close
 	btn.MouseButton1Down:Connect(function()
 		local vu = game:GetService("VirtualUser")
 		game:GetService("Players").LocalPlayer.Idled:connect(function()
-   			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-   			wait(1)
-   			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 		end)
 	end)
 	close.MouseButton1Down:Connect(function()
 		screengui:Destroy()
 	end)
 end
-coroutine.wrap(YQMLIJB_fake_script)()
-local function FKLH_fake_script() -- main.autofarm 
+coroutine.wrap(TEDNRRW_fake_script)()
+local function JWHX_fake_script() -- main.autofarm 
 	local script = Instance.new('LocalScript', main)
 
 	local btn = script.Parent.autofarm
@@ -253,8 +281,8 @@ local function FKLH_fake_script() -- main.autofarm
 		end
 	end)
 end
-coroutine.wrap(FKLH_fake_script)()
-local function UEJHF_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(JWHX_fake_script)()
+local function RFVWV_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local text = script.Parent.Parent
@@ -264,4 +292,39 @@ local function UEJHF_fake_script() -- TextButton.LocalScript
 		text.Visible = false
 	end)
 end
-coroutine.wrap(UEJHF_fake_script)()
+coroutine.wrap(RFVWV_fake_script)()
+local function EUCMWRH_fake_script() -- main.esp 
+	local script = Instance.new('LocalScript', main)
+
+	local btn = script.Parent.esp
+	local status = script.Parent.espstatus
+	local on = false
+	local worldscreen = script.Parent.world
+	
+	btn.MouseButton1Down:Connect(function()
+		local world_number = tonumber(worldscreen.Text)
+		if on then
+			on = false
+			status.Text = "ESP: OFF"
+			for i,Thing in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+				local a = Thing:FindFirstChild("BillboardGui")
+				if a then
+					a:Destroy()
+				end
+			end
+		else
+			on = true
+			status.Text = "ESP: ON"
+			for i,Thing in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+				local x = Instance.new('BillboardGui',Thing)
+				x.AlwaysOnTop = true
+				x.Size = UDim2.new(1,0,1,0)
+				local b = Instance.new('Frame',x)
+				b.Size = UDim2.new(1,0,1,0)
+				x.Adornee = Thing
+				b.BackgroundColor3 = Color3.new(1,1,1)
+			end
+		end
+	end)
+end
+coroutine.wrap(EUCMWRH_fake_script)()
