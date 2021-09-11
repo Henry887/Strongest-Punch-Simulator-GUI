@@ -1,3 +1,7 @@
+-- Made by Henry1887#6969
+-- If you want to support me: https://paypal.me/pools/c/8CQMlwAT7n
+-- Its recommended that u dont have esp enabled while autofarming, it will impact the speed of the autofarm
+
 if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
@@ -19,14 +23,12 @@ if game.PlaceId == 6875469709 then
 			while auto do
 				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
 					if auto then
-						local obj = "0"
-						if world_number == "10" then
-							obj = "0.5"
+						local part1 = v:FindFirstChild("0.5")
+						if part1 then
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0.5"].CFrame
+						else
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0"].CFrame
 						end
-						if world_number == "25" then
-							obj = "0.5"
-						end
-						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v[obj].CFrame
 						wait(0.5)
 					end
 				end
