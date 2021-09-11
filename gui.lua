@@ -1,11 +1,3 @@
--- Made by Henry1887#6969
--- Using Library for gui by Zerio#0880
--- If u want to have faster autofarm, go to line 34 and change the wait time between every teleport example: wait(3). (WARNING If u make it faster than it is at default, then your game can crash)
--- Notice: ESP will heavily affect your fps (if you have a shitty laptop like me)
--- Features: Orb ESP, ESP Color Changer, AutoFarm, Anti AFK Kick
--- If want to support me: https://paypal.me/pools/c/8CQMlwAT7n (any donation helps)
--- Im currently saving up money for a better laptop/pc
-
 if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
@@ -29,10 +21,10 @@ if game.PlaceId == 6875469709 then
 					if auto then
 						local obj = "0"
 						if world_number == "10" then
-							obj = "0.30000001192093"
+							obj = "0.5"
 						end
 						if world_number == "25" then
-							obj = "0.30000001192093"
+							obj = "0.5"
 						end
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v[obj].CFrame
 						wait(0.5)
