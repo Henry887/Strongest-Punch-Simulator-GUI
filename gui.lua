@@ -6,10 +6,11 @@ if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
     local noclip = false
+    local autopet = false
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-	local Window = Library.CreateLib("Strongest Punch Simulator V4", "Synapse")
+	local Window = Library.CreateLib("Strongest Punch Simulator", "Synapse")
 	local MainTab = Window:NewTab("Main")
 	local VisualsTab = Window:NewTab("Visuals")
 	local InfoTab = Window:NewTab("Keybinds")
@@ -18,6 +19,22 @@ if game.PlaceId == 6875469709 then
 	local KeybindSection = InfoTab:NewSection("Keybinds")
 	local VisualSection = VisualsTab:NewSection("Visual")
 	local FarmSection = MainTab:NewSection("Farm")
+	FarmSection:NewToggle("Auto Pet Upgrade", "Automatically upgrades your pet if you have enought orbs", function(state)
+	   if state then
+	       autopet = true
+	       while autopet do
+	           local args = {
+	               [1] = {
+	                   [1] = "UpgradeCurrentPet"
+	               }
+	           }
+	           game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+	           wait()
+	       end
+	   else
+	       autopet = false
+	   end
+	end)
 	FarmSection:NewToggle("AutoFarm", "Teleports you to every orb", function(state)
 		if state then
 		    auto = true
@@ -68,7 +85,7 @@ if game.PlaceId == 6875469709 then
 					    b.BackgroundColor3 = esp_color
 				    end
                 end
-		        wait()
+		        wait(0.2)
 			end
         else
             esp = false
