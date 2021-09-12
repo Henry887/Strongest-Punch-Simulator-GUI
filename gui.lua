@@ -24,7 +24,7 @@ if game.PlaceId == 6875469709 then
 	local FarmSection = MainTab:NewSection("Farm")
 	local PlayerSection = MainTab:NewSection("Player")
 	local HitboxSection = VisualsTab:NewSection("Hitbox")
-	HitboxSection:NewSlider("Hitbox Size", "How big u want the hitboxes to be", 50, 10, function(s)
+	HitboxSection:NewSlider("Hitbox Size", "How big u want the hitboxes to be", 40, 10, function(s)
 	        size = s
 	    end)
 	HitboxSection:NewToggle("Orb Hitbox Expander", "it makes the hitbox for the orbs bigger", function(state)
