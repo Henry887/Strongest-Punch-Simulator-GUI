@@ -8,6 +8,8 @@ if game.PlaceId == 6875469709 then
     local noclip = false
     local autopet = false
     local delay = 0.5
+    local hitbox = false
+    local size = 25
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -20,6 +22,38 @@ if game.PlaceId == 6875469709 then
 	local KeybindSection = InfoTab:NewSection("Keybinds")
 	local VisualSection = VisualsTab:NewSection("Visual")
 	local FarmSection = MainTab:NewSection("Farm")
+	local PlayerSection = MainTab:NewSection("Player")
+	local HitboxSection = VisualsTab:NewSection("Hitbox")
+	HitboxSection:NewSlider("Hitbox Size", "How big u want the hitboxes to be", 50, 10, function(s)
+	        size = s
+	    end)
+	HitboxSection:NewToggle("Orb Hitbox Expander", "it makes the hitbox for the orbs bigger", function(state)
+	    if state then
+	        hitbox = true
+	        while wait() do
+	            for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+                    if v and hitbox then
+                        if v:FindFirstChild("0") then
+                            v["0"].Size = Vector3.new(size, size, size)
+                        else
+                            v["0.30000001192093"].Size = Vector3.new(size, size, size)
+                        end
+                    end
+                end
+	        end
+	    else
+	        hitbox = false
+	        for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+                if v then
+                    if v:FindFirstChild("0") then
+                        v["0"].Size = Vector3.new(10, 10, 10)
+                    else
+                        v["0.30000001192093"].Size = Vector3.new(10, 10, 10)
+                    end
+                end
+            end
+	    end
+	end)
 	FarmSection:NewToggle("Auto Pet Upgrade", "Automatically upgrades your pet if you have enought orbs", function(state)
 	   if state then
 	       autopet = true
@@ -60,7 +94,6 @@ if game.PlaceId == 6875469709 then
 		    auto = false
 		end
 	end)
-	local PlayerSection = MainTab:NewSection("Player")
 	PlayerSection:NewToggle("Noclip", "Lets you walk through walls", function(state)
 	    noclip = state
 	end)
