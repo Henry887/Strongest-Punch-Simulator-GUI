@@ -70,7 +70,7 @@ if game.PlaceId == 6875469709 then
 	       autopet = false
 	   end
 	end)
-	FarmSection:NewSlider("Farm Delay(ms)", "Delay between teleports in miliseconds", 999, 300, function(s)
+	FarmSection:NewSlider("Farm Delay(ms)", "Delay between teleports in miliseconds", 999, 450, function(s)
         delay = tonumber("0."..tostring(s))
     end)
 	FarmSection:NewToggle("AutoFarm", "Teleports you to every orb", function(state)
