@@ -46,9 +46,9 @@ if game.PlaceId == 6875469709 then
 	        for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
                 if v then
                     if v:FindFirstChild("0") then
-                        v["0"].Size = Vector3.new(10, 10, 10)
+                        v["0"].Size = Vector3.new(5, 5, 5)
                     else
-                        v["0.30000001192093"].Size = Vector3.new(10, 10, 10)
+                        v["0.30000001192093"].Size = Vector3.new(5, 5, 5)
                     end
                 end
             end
@@ -81,9 +81,9 @@ if game.PlaceId == 6875469709 then
 				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
                 			if v then
                     				if v:FindFirstChild("0") then
-                        				v["0"].Size = Vector3.new(10, 10, 10)
+                        				v["0"].Size = Vector3.new(5, 5, 5)
                     				else
-                        				v["0.30000001192093"].Size = Vector3.new(10, 10, 10)
+                        				v["0.30000001192093"].Size = Vector3.new(5, 5, 5)
                     				end
                 			end
             			end
