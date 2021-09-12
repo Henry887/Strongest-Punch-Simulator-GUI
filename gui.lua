@@ -77,6 +77,7 @@ if game.PlaceId == 6875469709 then
 		if state then
 		    auto = true
 			while auto do
+				hitbox = false
 				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
 					if auto then
 						local part1 = v:FindFirstChild("0.5")
