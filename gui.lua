@@ -79,6 +79,15 @@ if game.PlaceId == 6875469709 then
 			while auto do
 				hitbox = false
 				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+                			if v then
+                    				if v:FindFirstChild("0") then
+                        				v["0"].Size = Vector3.new(10, 10, 10)
+                    				else
+                        				v["0.30000001192093"].Size = Vector3.new(10, 10, 10)
+                    				end
+                			end
+            			end
+				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
 					if auto then
 						local part1 = v:FindFirstChild("0.5")
 						if part1 then
