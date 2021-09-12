@@ -5,10 +5,11 @@
 if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
+    local noclip = false
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-	local Window = Library.CreateLib("Strongest Punch Simulator", "Synapse")
+	local Window = Library.CreateLib("Strongest Punch Simulator V4", "Synapse")
 	local MainTab = Window:NewTab("Main")
 	local VisualsTab = Window:NewTab("Visuals")
 	local InfoTab = Window:NewTab("Keybinds")
@@ -38,6 +39,13 @@ if game.PlaceId == 6875469709 then
 		    auto = false
 		end
 	end)
+	local PlayerSection = MainTab:NewSection("Player")
+	PlayerSection:NewToggle("Noclip", "Lets you walk through walls", function(state)
+	    noclip = state
+	end)
+	PlayerSection:NewSlider("Walkspeed", "Changes your walking speed", 1000, 16, function(s)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
 	VisualSection:NewColorPicker("ESP Color", "Pick the color of the esp", Color3.fromRGB(0,0,0), function(color)
 		esp_color = color
 	end)
@@ -77,7 +85,7 @@ if game.PlaceId == 6875469709 then
     KeybindSection:NewKeybind("open/close gui", "Closes or opens this gui", Enum.KeyCode.F, function()
 	    Library:ToggleUI()
     end)
-    CreditsSection:NewLabel("Library: Zerio#0880")
+    CreditsSection:NewLabel("UI Library: Zerio#0880")
     CreditsSection:NewLabel("Scripts: Henry1887#6969")
     local vu = game:GetService("VirtualUser")
 	game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -86,8 +94,10 @@ if game.PlaceId == 6875469709 then
 		vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 	end)
 	print("Succesfully Loaded GUI!")
-	while true do
-	    world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
-	    wait(1)
-    end
+	game:GetService('RunService').Stepped:connect(function()
+        if noclip then
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+        end
+        world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
+    end)
 end
