@@ -7,6 +7,7 @@ if game.PlaceId == 6875469709 then
     local esp = false
     local noclip = false
     local autopet = false
+    local delay = 0.5
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -35,6 +36,9 @@ if game.PlaceId == 6875469709 then
 	       autopet = false
 	   end
 	end)
+	FarmSection:NewSlider("Farm Delay(ms)", "Delay between teleports in miliseconds", 999, 300, function(s)
+        delay = tonumber("0."..tostring(s))
+    end)
 	FarmSection:NewToggle("AutoFarm", "Teleports you to every orb", function(state)
 		if state then
 		    auto = true
@@ -47,7 +51,7 @@ if game.PlaceId == 6875469709 then
 						else
 						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0"].CFrame
 						end
-						wait(0.5)
+						wait(delay)
 					end
 				end
 				wait(1)
