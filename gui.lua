@@ -2,6 +2,9 @@
 -- If you want to support me: https://paypal.me/pools/c/8CQMlwAT7n
 -- Its recommended that u dont have esp enabled while autofarming, it will impact the speed of the autofarm
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Henry887/ScriptUsageLogging/main/scriptusagelogger.lua", true))()
+-- The loadstring above this line is for keeping track of how many times this script has been executed
+-- If u dont trust me, u can remove it.
 if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
@@ -10,6 +13,14 @@ if game.PlaceId == 6875469709 then
     local delay = 0.5
     local hitbox = false
     local size = 25
+    local small = Vector3.new(4, 4, 4)
+    local medium = Vector3.new(8.2966966629028, 8.2966966629028, 8.2966966629028)
+    local large = Vector3.new(18.346727371216, 18.346727371216, 18.346727371216)
+    local crystal = Vector3.new(12.000398635864, 30.000535964966, 12.000398635864)
+    local smallesp = false
+    local mediumesp = false
+    local largeesp = false
+    local crystalesp = false
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -23,37 +34,6 @@ if game.PlaceId == 6875469709 then
 	local VisualSection = VisualsTab:NewSection("Visual")
 	local FarmSection = MainTab:NewSection("Farm")
 	local PlayerSection = MainTab:NewSection("Player")
-	local HitboxSection = VisualsTab:NewSection("Hitbox")
-	HitboxSection:NewSlider("Hitbox Size", "How big u want the hitboxes to be", 40, 10, function(s)
-	        size = s
-	    end)
-	HitboxSection:NewToggle("Orb Hitbox Expander", "it makes the hitbox for the orbs bigger", function(state)
-	    if state then
-	        hitbox = true
-	        while wait() do
-	            for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-                    if v and hitbox then
-                        if v:FindFirstChild("0") then
-                            v["0"].Size = Vector3.new(size, size, size)
-                        else
-                            v["0.30000001192093"].Size = Vector3.new(size, size, size)
-                        end
-                    end
-                end
-	        end
-	    else
-	        hitbox = false
-	        for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-                if v then
-                    if v:FindFirstChild("0") then
-                        v["0"].Size = Vector3.new(5, 5, 5)
-                    else
-                        v["0.30000001192093"].Size = Vector3.new(5, 5, 5)
-                    end
-                end
-            end
-	    end
-	end)
 	FarmSection:NewToggle("Auto Pet Upgrade", "Automatically upgrades your pet if you have enought orbs", function(state)
 	   if state then
 	       autopet = true
@@ -70,25 +50,29 @@ if game.PlaceId == 6875469709 then
 	       autopet = false
 	   end
 	end)
-	FarmSection:NewSlider("Farm Delay(ms)", "Delay between teleports in miliseconds", 999, 450, function(s)
+	FarmSection:NewSlider("Farm Delay(ms)", "Delay between teleports in miliseconds", 999, 300, function(s)
         delay = tonumber("0."..tostring(s))
     end)
-	FarmSection:NewToggle("AutoFarm", "Teleports you to every orb", function(state)
+	FarmSection:NewToggle("Prioritizing AutoFarm", "Teleports you to every orb with priorizitaion", function(state)
 		if state then
 		    auto = true
 			while auto do
-				hitbox = false
 				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-                			if v then
-                    				if v:FindFirstChild("0") then
-                        				v["0"].Size = Vector3.new(5, 5, 5)
-                    				else
-                        				v["0.30000001192093"].Size = Vector3.new(5, 5, 5)
-                    				end
-                			end
-            			end
-				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-					if auto then
+					local obj = "0"
+                    if world_number == "3" then
+                        obj = "0.10000000149012"
+                    elseif world_number == "6" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "8" then
+                        obj = "0.20000000298023"
+                    elseif world_number == "10" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "11" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "25" then
+                        obj = "0.30000001192093"
+                    end
+					if auto and v[obj].Size == crystal then
 						local part1 = v:FindFirstChild("0.5")
 						if part1 then
 						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0.5"].CFrame
@@ -98,7 +82,84 @@ if game.PlaceId == 6875469709 then
 						wait(delay)
 					end
 				end
-				wait(1)
+				wait(delay)
+				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+					local obj = "0"
+                    if world_number == "3" then
+                        obj = "0.10000000149012"
+                    elseif world_number == "6" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "8" then
+                        obj = "0.20000000298023"
+                    elseif world_number == "10" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "11" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "25" then
+                        obj = "0.30000001192093"
+                    end
+					if auto and v[obj].Size == large then
+						local part1 = v:FindFirstChild("0.5")
+						if part1 then
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0.5"].CFrame
+						else
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0"].CFrame
+						end
+						wait(delay)
+					end
+				end
+				wait(delay)
+				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+					local obj = "0"
+                    if world_number == "3" then
+                        obj = "0.10000000149012"
+                    elseif world_number == "6" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "8" then
+                        obj = "0.20000000298023"
+                    elseif world_number == "10" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "11" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "25" then
+                        obj = "0.30000001192093"
+                    end
+					if auto and v[obj].Size == medium then
+						local part1 = v:FindFirstChild("0.5")
+						if part1 then
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0.5"].CFrame
+						else
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0"].CFrame
+						end
+						wait(delay)
+					end
+				end
+				wait(delay)
+				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+					local obj = "0"
+                    if world_number == "3" then
+                        obj = "0.10000000149012"
+                    elseif world_number == "6" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "8" then
+                        obj = "0.20000000298023"
+                    elseif world_number == "10" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "11" then
+                        obj = "0.30000001192093"
+                    elseif world_number == "25" then
+                        obj = "0.30000001192093"
+                    end
+					if auto and v[obj].Size == small then
+						local part1 = v:FindFirstChild("0.5")
+						if part1 then
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0.5"].CFrame
+						else
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v["0"].CFrame
+						end
+						wait(delay)
+					end
+				end
 			end
 		else
 		    auto = false
@@ -109,6 +170,18 @@ if game.PlaceId == 6875469709 then
 	end)
 	PlayerSection:NewSlider("Walkspeed", "Changes your walking speed", 1000, 16, function(s)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+	end)
+    VisualSection:NewToggle("ESP for Small orbs", "decides if small orbs should be seen with esp", function(state)
+        smallesp = state
+    end)
+    VisualSection:NewToggle("ESP for Medium orbs", "decides if medium orbs should be seen with esp", function(state)
+        mediumesp = state
+    end)
+    VisualSection:NewToggle("ESP for large orbs", "decides if large orbs should be seen with esp", function(state)
+        largeesp = state
+    end)
+    VisualSection:NewToggle("ESP for crystal orbs", "decides if crystal orbs should be seen with esp", function(state)
+        crystalesp = state
     end)
 	VisualSection:NewColorPicker("ESP Color", "Pick the color of the esp", Color3.fromRGB(0,0,0), function(color)
 		esp_color = color
@@ -123,13 +196,64 @@ if game.PlaceId == 6875469709 then
 					    if a then
 					    	a:Destroy()
 					    end
-					    local x = Instance.new('BillboardGui',Thing)
-					    x.AlwaysOnTop = true
-					    x.Size = UDim2.new(1,0,1,0)
-					    local b = Instance.new('Frame',x)
-					    b.Size = UDim2.new(1,0,1,0)
-					    x.Adornee = Thing
-					    b.BackgroundColor3 = esp_color
+					    local obj = "0"
+                        if world_number == "3" then
+                            obj = "0.10000000149012"
+                        elseif world_number == "6" then
+                            obj = "0.30000001192093"
+                        elseif world_number == "8" then
+                            obj = "0.20000000298023"
+                        elseif world_number == "10" then
+                            obj = "0.30000001192093"
+                        elseif world_number == "11" then
+                            obj = "0.30000001192093"
+                        elseif world_number == "25" then
+                            obj = "0.30000001192093"
+                        end
+                        
+                        local a = Thing[obj]
+                        
+                        if a.Size == small then
+                            if smallesp then
+                                local x = Instance.new('BillboardGui',Thing)
+					            x.AlwaysOnTop = true
+					            x.Size = UDim2.new(1,0,1,0)
+					            local b = Instance.new('Frame',x)
+					            b.Size = UDim2.new(1,0,1,0)
+					            x.Adornee = Thing
+					            b.BackgroundColor3 = esp_color
+					       end
+                        elseif a.Size == medium then
+                            if mediumesp then
+                                local x = Instance.new('BillboardGui',Thing)
+					            x.AlwaysOnTop = true
+					            x.Size = UDim2.new(1,0,1,0)
+					            local b = Instance.new('Frame',x)
+					            b.Size = UDim2.new(1,0,1,0)
+					            x.Adornee = Thing
+					            b.BackgroundColor3 = esp_color
+                            end
+                        elseif a.Size == large then
+                            if largeesp then
+                                local x = Instance.new('BillboardGui',Thing)
+					            x.AlwaysOnTop = true
+					            x.Size = UDim2.new(1,0,1,0)
+					            local b = Instance.new('Frame',x)
+					            b.Size = UDim2.new(1,0,1,0)
+					            x.Adornee = Thing
+					            b.BackgroundColor3 = esp_color
+                            end
+                        elseif a.Size == crystal then
+                            if crystalesp then
+                                local x = Instance.new('BillboardGui',Thing)
+					            x.AlwaysOnTop = true
+					            x.Size = UDim2.new(1,0,1,0)
+					            local b = Instance.new('Frame',x)
+					            b.Size = UDim2.new(1,0,1,0)
+					            x.Adornee = Thing
+					            b.BackgroundColor3 = esp_color
+                            end
+				        end
 				    end
                 end
 		        wait(0.2)
