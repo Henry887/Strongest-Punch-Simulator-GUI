@@ -186,7 +186,7 @@ if game.PlaceId == 6875469709 then
 	VisualSection:NewColorPicker("ESP Color", "Pick the color of the esp", Color3.fromRGB(0,0,0), function(color)
 		esp_color = color
 	end)
-	VisualSection:NewSlider("ESP Size", "changed the size of the esp", 4, 1, function(s)
+    VisualSection:NewSlider("ESP Size", "changes the size of the esp", 4, 1, function(s)
         espsize = s
     end)
 	VisualSection:NewToggle("Orb ESP", "You can see all orbs through any wall", function(state)
