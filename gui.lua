@@ -7,6 +7,7 @@
 if game.PlaceId == 6875469709 then
     local auto = false
     local esp = false
+    local espsize = 1
     local noclip = false
     local autopet = false
     local delay = 0.5
@@ -185,6 +186,9 @@ if game.PlaceId == 6875469709 then
 	VisualSection:NewColorPicker("ESP Color", "Pick the color of the esp", Color3.fromRGB(0,0,0), function(color)
 		esp_color = color
 	end)
+	VisualSection:NewSlider("ESP Size", "changed the size of the esp", 4, 1, function(s)
+        espsize = s
+    end)
 	VisualSection:NewToggle("Orb ESP", "You can see all orbs through any wall", function(state)
         if state then
             esp = true
@@ -216,9 +220,9 @@ if game.PlaceId == 6875469709 then
                             if smallesp then
                                 local x = Instance.new('BillboardGui',Thing)
 					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(1,0,1,0)
+					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(1,0,1,0)
+					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            x.Adornee = Thing
 					            b.BackgroundColor3 = esp_color
 					       end
@@ -226,9 +230,9 @@ if game.PlaceId == 6875469709 then
                             if mediumesp then
                                 local x = Instance.new('BillboardGui',Thing)
 					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(1,0,1,0)
+					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(1,0,1,0)
+					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            x.Adornee = Thing
 					            b.BackgroundColor3 = esp_color
                             end
@@ -236,9 +240,9 @@ if game.PlaceId == 6875469709 then
                             if largeesp then
                                 local x = Instance.new('BillboardGui',Thing)
 					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(1,0,1,0)
+					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(1,0,1,0)
+					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            x.Adornee = Thing
 					            b.BackgroundColor3 = esp_color
                             end
@@ -246,9 +250,9 @@ if game.PlaceId == 6875469709 then
                             if crystalesp then
                                 local x = Instance.new('BillboardGui',Thing)
 					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(1,0,1,0)
+					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(1,0,1,0)
+					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
 					            x.Adornee = Thing
 					            b.BackgroundColor3 = esp_color
                             end
