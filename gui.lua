@@ -123,15 +123,15 @@ if game.PlaceId == 6875469709 then
 					    local ignorethis = tonumber(world_number)
                         if ignorethis == 3 then
                             obj = "0.10000000149012"
-                        elseif world_number == "6" then
+                        elseif ignorethis == 6 then
                             obj = "0.30000001192093"
-                        elseif world_number == "8" then
+                        elseif ignorethis == 8 then
                             obj = "0.20000000298023"
-                        elseif world_number == "10" then
+                        elseif ignorethis == 10 then
                             obj = "0.30000001192093"
-                        elseif world_number == "11" then
+                        elseif ignorethis == 11 then
                             obj = "0.30000001192093"
-                        elseif world_number == "25" then
+                        elseif ignorethis == 25 then
                             obj = "0.30000001192093"
                         end
                         
