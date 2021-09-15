@@ -14,14 +14,8 @@ if game.PlaceId == 6875469709 then
     local delay = 0.65
     local hitbox = false
     local size = 25
-    local small = Vector3.new(4, 4, 4)
-    local medium = Vector3.new(8.2966966629028, 8.2966966629028, 8.2966966629028)
-    local large = Vector3.new(18.346727371216, 18.346727371216, 18.346727371216)
-    local crystal = Vector3.new(12.000398635864, 30.000535964966, 12.000398635864)
-    local smallesp = false
-    local mediumesp = false
-    local largeesp = false
-    local crystalesp = false
+    local autofarming = Instance.new("BoolValue")
+    autofarming.Value = false
 	local world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
 	local esp_color = Color3.fromRGB(0,0,0)
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -55,34 +49,25 @@ if game.PlaceId == 6875469709 then
         delay = tonumber("0."..tostring(s))
     end)
 	FarmSection:NewToggle("Undetectable AutoFarm", "Collects Orbs Without teleporting you", function(state)
-		if state then
-		    auto = true
-		    local timespent = 0
-			while auto do
-				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-					if auto then
-					    for a, b in pairs(v:GetChildren()) do
-					        local touchinterest = b:FindFirstChild("TouchInterest")
-					        if touchinterest then
-					            firetouchinterest(plr, b, 0)
-						        firetouchinterest(plr, b, 1)
-					        end
-					    end
-					    wait(delay)
-					    timespent = timespent + delay
-					end
-					if timespent > 300 then
-					    timespent = 0
-					    if auto then
-					        wait(15)
-					    end
-					end
-				end
-			end
-		else
-		    auto = false
-		end
+		autofarming.Value = state
 	end)
+	FarmSection:NewToggle("AutoWorld by Cyberpunk2666r", "Automatically switch worlds", function(state)
+        if state then
+            autoworld = true
+            while autoworld do
+               local args = {
+                   [1] = {
+                       [1] = "WarpPlrToOtherMap",
+                       [2] = "Next"
+                   }
+               }
+               game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+               wait(2)
+            end
+        else
+            autoworld = false
+        end
+    end)
 	PlayerSection:NewLabel("Noclip can cause crashes if u autofarm and noclip")
 	PlayerSection:NewToggle("Noclip", "Lets you walk through walls", function(state)
 	    noclip = state
@@ -90,18 +75,6 @@ if game.PlaceId == 6875469709 then
 	PlayerSection:NewSlider("Walkspeed", "Changes your walking speed", 1000, 16, function(s)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 	end)
-    VisualSection:NewToggle("ESP for Small orbs", "decides if small orbs should be seen with esp", function(state)
-        smallesp = state
-    end)
-    VisualSection:NewToggle("ESP for Medium orbs", "decides if medium orbs should be seen with esp", function(state)
-        mediumesp = state
-    end)
-    VisualSection:NewToggle("ESP for large orbs", "decides if large orbs should be seen with esp", function(state)
-        largeesp = state
-    end)
-    VisualSection:NewToggle("ESP for crystal orbs", "decides if crystal orbs should be seen with esp", function(state)
-        crystalesp = state
-    end)
 	VisualSection:NewColorPicker("ESP Color", "Pick the color of the esp", Color3.fromRGB(0,0,0), function(color)
 		esp_color = color
 	end)
@@ -113,86 +86,34 @@ if game.PlaceId == 6875469709 then
             esp = true
             while esp do
                 for i,Thing in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-				    if Thing then
-					    local a = Thing:FindFirstChild("BillboardGui")
-					    if a then
-					    	a:Destroy()
-					    end
-					    local obj = "0"
-					    local ignorethis = tonumber(world_number)
-                        if ignorethis == 3 then
-                            obj = "0.10000000149012"
-                        elseif ignorethis == 6 then
-                            obj = "0.30000001192093"
-                        elseif ignorethis == 8 then
-                            obj = "0.20000000298023"
-                        elseif ignorethis == 10 then
-                            obj = "0.30000001192093"
-                        elseif ignorethis == 11 then
-                            obj = "0.30000001192093"
-                        elseif ignorethis == 25 then
-                            obj = "0.30000001192093"
+                    if Thing then
+                        local a = Thing:FindFirstChild("BillboardGui")
+                        if a then
+                            a:Destroy()
                         end
-                        
-                        local a = Thing[obj]
-                        
-                        if a.Size == small then
-                            if smallesp then
-                                local x = Instance.new('BillboardGui',Thing)
-					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            x.Adornee = Thing
-					            b.BackgroundColor3 = esp_color
-					       end
-                        elseif a.Size == medium then
-                            if mediumesp then
-                                local x = Instance.new('BillboardGui',Thing)
-					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            x.Adornee = Thing
-					            b.BackgroundColor3 = esp_color
-                            end
-                        elseif a.Size == large then
-                            if largeesp then
-                                local x = Instance.new('BillboardGui',Thing)
-					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            x.Adornee = Thing
-					            b.BackgroundColor3 = esp_color
-                            end
-                        elseif a.Size == crystal then
-                            if crystalesp then
-                                local x = Instance.new('BillboardGui',Thing)
-					            x.AlwaysOnTop = true
-					            x.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            local b = Instance.new('Frame',x)
-					            b.Size = UDim2.new(espsize,espsize,espsize,espsize)
-					            x.Adornee = Thing
-					            b.BackgroundColor3 = esp_color
-                            end
-                        end
-				    end
+                        local x = Instance.new('BillboardGui',Thing)
+                        x.AlwaysOnTop = true
+                        x.Size = UDim2.new(espsize,0,espsize,0)
+                        local b = Instance.new('Frame',x)
+                        b.Size = UDim2.new(espsize,0,espsize,0)
+                        x.Adornee = Thing
+                        b.BackgroundColor3 = esp_color
+                    end
                 end
-		        wait(0.2)
-			end
+                wait(0.2)
+            end
         else
             esp = false
             for i,Thing in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
-				if Thing then
-					local a = Thing:FindFirstChild("BillboardGui")
-					if a then
-						a:Destroy()
-					end
-				end
-			end
+                if Thing then
+                    local a = Thing:FindFirstChild("BillboardGui")
+                    if a then
+                        a:Destroy()
+                    end
+                end
+            end
         end
-	end)
+    end)
     KeybindSection:NewKeybind("open/close gui", "Closes or opens this gui", Enum.KeyCode.F, function()
 	    Library:ToggleUI()
     end)
@@ -209,7 +130,40 @@ if game.PlaceId == 6875469709 then
         if noclip then
             game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
         end
-        world_number = game.Players.LocalPlayer.leaderstats.WORLD.Value
+	end)
+    game.Players.LocalPlayer.leaderstats.WORLD.Changed:Connect(function()
+        world_number = game.Players.LocalPlayer.leaderstats.WORLD.value
+        if auto then
+            auto = false
+            wait(5)
+            auto = true
+        end
+    end)
+    autofarming.Changed:Connect(function(NewValue)
+        if autofarming.Value then
+            local timespent = 0
+			while autofarming.Value do
+				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+					if autofarming.Value then
+					    for a, b in pairs(v:GetChildren()) do
+					        local touchinterest = b:FindFirstChild("TouchInterest")
+					        if touchinterest then
+					            firetouchinterest(plr, b, 0)
+						        firetouchinterest(plr, b, 1)
+					        end
+					    end
+					    wait(delay)
+					    timespent = timespent + delay
+					end
+					if timespent > 300 then
+					    timespent = 0
+					    if autofarming.Value then
+					        wait(15)
+					    end
+					end
+				end
+			end
+        end
     end)
 end
 
