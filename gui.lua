@@ -155,10 +155,10 @@ if game.PlaceId == 6875469709 then
 					    wait(delay)
 					    timespent = timespent + delay
 					end
-					if timespent > 300 then
+					if timespent > 150 then
 					    timespent = 0
 					    if autofarming.Value then
-					        wait(15)
+					        wait(20)
 					    end
 					end
 				end
