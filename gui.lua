@@ -143,7 +143,9 @@ if game.PlaceId == 6875469709 then
         if autofarming.Value then
             local timespent = 0
 			while autofarming.Value do
-				for i,v in pairs(game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()) do
+				local orbs = game.Workspace.Map.Stages.Boosts[world_number]:GetChildren()
+				if #orbs > 0 then
+				for i,v in pairs(orbs) do
 					if autofarming.Value then
 					    for a, b in pairs(v:GetChildren()) do
 					        local touchinterest = b:FindFirstChild("TouchInterest")
@@ -153,14 +155,10 @@ if game.PlaceId == 6875469709 then
 					        end
 					    end
 					    wait(delay)
-					    timespent = timespent + delay
 					end
-					if timespent > 150 then
-					    timespent = 0
-					    if autofarming.Value then
-					        wait(20)
-					    end
-					end
+				end
+				else
+					wait(30)
 				end
 			end
         end
