@@ -11,7 +11,7 @@ if game.PlaceId == 6875469709 then
     local espsize = 1
     local noclip = false
     local autopet = false
-    local delay = 0.65
+    local delay = 0.7
     local hitbox = false
     local size = 25
     local autofarming = Instance.new("BoolValue")
